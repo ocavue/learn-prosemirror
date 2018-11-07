@@ -4,9 +4,11 @@ import { EditorView } from "prosemirror-view"
 import { undo, redo, history } from "prosemirror-history"
 import { keymap } from "prosemirror-keymap"
 import { baseKeymap } from "prosemirror-commands"
+import { DOMParser } from "prosemirror-model"
+
 
 let state = EditorState.create({
-  schema,
+  doc: DOMParser.fromSchema(schema).parse(content),
   plugins: [
     history(),
     keymap({ "Mod-z": undo, "Mod-y": redo }),
